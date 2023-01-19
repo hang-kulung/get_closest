@@ -1,5 +1,60 @@
 HomeScreen:
 
+<MenuScreen@BoxLayout>:
+    orientation: "vertical"
+    size_hint: None, None
+    size: "300dp","200dp"
+    pos_hint: {"center_x":0.5,"center_y":0.5}
+    spacing: "70dp"
+    Label:
+        text: "CHOOSE YOUR NUMBERS"
+        size_hint: None, None
+        size: "200dp","20dp"
+        pos_hint: {"center_x": 0.5}
+    NumberDisplay:
+    MenuButtons:  
+
+<NumberDisplay>:
+    orientation: "lr-tb"
+    size_hint: None, None
+    size: "220dp","20dp"
+    pos_hint: {"center_x":0.5}
+    spacing: "30dp"
+
+<MenuButtons@BoxLayout>
+    #Grid Layout gave lots of problems  unfortunately. maybe solve it with a grid of 5 columns?
+    orientation: "vertical"
+    spacing: "20dp"
+    size_hint: None,None
+    size: "250dp","100dp"
+    pos_hint: {"center_x":0.5}
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "100dp"
+        Button:
+            text: "SMALL"
+            size_hint: None, None
+            size: "80dp","30dp"
+            pos_hint: {"center_x": 0.5}
+        Button: 
+            text: "BIG"
+            size_hint: None, None
+            size: "80dp","30dp"
+            pos_hint: {"center_x": 0.5}
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "100dp"
+        Button: 
+            text: "CLEAR"
+            size_hint: None, None
+            size: "80dp","30dp"
+            pos_hint: {"center_x": 0.5}
+        Button: 
+            text: "NEXT"
+            size_hint: None, None
+            size: "80dp","30dp"
+            pos_hint: {"center_x": 0.5}
+
 <HomeScreen@BoxLayout>:
     #Force Method fo doing it
     orientation: 'vertical'
