@@ -1,10 +1,14 @@
-MainScreen:
+HomeScreen:
 
-<MainScreen>:
+<HomeScreen@BoxLayout>:
     #Force Method fo doing it
     orientation: 'vertical'
+    size_hint: 1,0.1 #mainscreen is shrunk to 10% height and 100% length 
+    spacing: "30dp" 
+    pos_hint: {"top":.8} #moves the top of the mainscreen to 80% on the veritcal axis
     Label:
-        size_hint: None,0.4
+        size_hint: None,None
+        size: "100dp","40dp"
         text: "WELCOME TO GET CLOSEST"
         pos_hint: {"center_x": 0.5}
     Button:
@@ -12,10 +16,4 @@ MainScreen:
         size_hint: None,None
         size: "100dp","30dp"
         pos_hint: {"center_x": 0.5}
-    Label: 
-        size_hint: None, 3
-        text: ""
     
-<MainWidget>:
-    Label:
-        text: ""
