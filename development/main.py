@@ -3,11 +3,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 
-class Options(BoxLayout):
-    pass
-class BoxLayoutExample(BoxLayout):
-    pass
-class MainScreen(Widget):
+class MainScreen(BoxLayout):
     pass
 
 class LabsApp(App):
