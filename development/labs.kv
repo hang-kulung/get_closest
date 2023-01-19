@@ -11,14 +11,17 @@ BoxLayoutExample:
     #Force Method fo doing it
     orientation: 'vertical'
     Label:
-        size_hint: None, None
-        size: "100dp","100dp"
+        size_hint: None,0.4
+        text: "WELCOME TO GET CLOSEST"
+        pos_hint: {"center_x": 0.5}
+    Button:
+        text: "START"
+        size_hint: None,None
+        size: "100dp","30dp"
+        pos_hint: {"center_x": 0.5}
+    Label: 
+        size_hint: None, 3
         text: ""
-    Label:
-        text: "Welcome to the game"
-    Options:
-        size_hint: None, None
-        size: "50dp","50dp"
     
 <MainWidget>:
     Label:
