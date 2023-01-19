@@ -6,11 +6,7 @@ from kivy.uix.boxlayout import BoxLayout
 class MainScreen(Widget):
     pass
 
-class MainScreenUI(Widget):
-    pass
-
 class LabsApp(App):
-    def build(self):
-        return MainScreenUI()
+    pass
 
 LabsApp().run()
