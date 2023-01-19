@@ -1,5 +1,25 @@
-MainScreen:
+BoxLayoutExample:
 
-<MainScreen>:
+<Options>:
+    orientation: 'vertical'
+    Button:
+        text: "Profile"
+    Button:
+        text: "Setting"
+
+<BoxlayoutExample>:
+    #Force Method fo doing it
+    orientation: 'vertical'
     Label:
-        text: "Under Maintenance"
+        size_hint: None, None
+        size: "100dp","100dp"
+        text: ""
+    Label:
+        text: "Welcome to the game"
+    Options:
+        size_hint: None, None
+        size: "50dp","50dp"
+    
+<MainWidget>:
+    Label:
+        text: "ahhah"
