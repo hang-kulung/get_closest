@@ -1,13 +1,16 @@
-HomeScreen:
+MenuScreen:
 
 <MenuScreen@BoxLayout>:
     orientation: "vertical"
     size_hint: None, None
-    size: "300dp","200dp"
+    size: "300dp","300dp"
     pos_hint: {"center_x":0.5,"center_y":0.5}
     spacing: "70dp"
     Label:
         text: "CHOOSE YOUR NUMBERS"
+        font_name: "fonts/Roboto.ttf"
+        font_size: "20dp"
+
         size_hint: None, None
         size: "200dp","20dp"
         pos_hint: {"center_x": 0.5}
@@ -16,59 +19,73 @@ HomeScreen:
 
 <NumberDisplay>:
     orientation: "lr-tb"
+
     size_hint: None, None
     size: "220dp","20dp"
     pos_hint: {"center_x":0.5}
     spacing: "30dp"
 
-<MenuButtons@BoxLayout>
-    #Grid Layout gave lots of problems  unfortunately. maybe solve it with a grid of 5 columns?
-    orientation: "vertical"
-    spacing: "20dp"
-    size_hint: None,None
-    size: "250dp","100dp"
-    pos_hint: {"center_x":0.5}
+
+<MenuButtons>:
+    rows: 2
+    cols: 2
     BoxLayout:
-        orientation: "horizontal"
-        spacing: "100dp"
+        padding: [10,10,40,10]
+        Button: 
+            text: "SMALL"   
+            on_press: root.Small() 
+    BoxLayout:
+        padding: [40,10,10,10]
         Button:
-            text: "SMALL"
-            size_hint: None, None
-            size: "80dp","30dp"
-            pos_hint: {"center_x": 0.5}
-        Button: 
             text: "BIG"
-            size_hint: None, None
-            size: "80dp","30dp"
-            pos_hint: {"center_x": 0.5}
+            on_press: root.Big()
     BoxLayout:
-        orientation: "horizontal"
-        spacing: "100dp"
-        Button: 
+        padding: [10,10,40,10]
+        Button:
             text: "CLEAR"
-            size_hint: None, None
-            size: "80dp","30dp"
-            pos_hint: {"center_x": 0.5}
+            on_press: root.Clears()
+    BoxLayout:
+        padding: [40,10,10,10]
         Button: 
             text: "NEXT"
-            size_hint: None, None
-            size: "80dp","30dp"
-            pos_hint: {"center_x": 0.5}
+            on_press: root.Next()
 
-<HomeScreen@BoxLayout>:
-    #Force Method fo doing it
-    orientation: 'vertical'
-    size_hint: 1,0.1 #mainscreen is shrunk to 10% height and 100% length 
-    spacing: "30dp" 
-    pos_hint: {"top":.8} #moves the top of the mainscreen to 80% on the veritcal axis
+<HomeScreen>:
+    #Force Method of doing it
+    cols:1
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 1,None
+        spacing: "20dp"
+        height: "150dp"
+        Label:
+            text:"WELCOME TO GET CLOSEST"
+            
+            font_name: "fonts/Roboto.ttf" #just experimental
+            font_size: "20dp" 
+
+            size_hint: None, None
+            size: "400dp","30dp"
+            pos_hint: {"center_x":0.5}
+        Button:
+            text: "START"
+            
+            on_press: root.start()
+
+            size_hint: None, None
+            size: "100dp","30dp"
+            pos_hint: {"center_x": .5}
     Label:
-        text: "WELCOME TO GET CLOSEST"
-        size_hint: None,None
-        size: "100dp","40dp"
-        pos_hint: {"center_x": 0.5}
-    Button:
-        text: "START"
-        size_hint: None,None
-        size: "100dp","30dp"
-        pos_hint: {"center_x": 0.5}
+        
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: None, None
+        size: "80dp","50dp"
+        Button:
+            text: "Profile"
+            on_press: root.Profile()
+        Button:
+            text: "Options"
+            on_press: root.Options()
+        
     
