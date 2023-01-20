@@ -1,48 +1,49 @@
-Options:
+HomeScreen:
 
 <MenuScreen>:
-    orientation: "vertical"
-    size_hint: None, None
-    size: "300dp","300dp"
-    pos_hint: {"center_x":0.5,"center_y":0.5}
-    spacing: "70dp"
-
-    Label:
-        text: "CHOOSE YOUR NUMBERS"
-
-        font_name: "fonts/Roboto.ttf"
-        font_size: "20dp"
-
+    BoxLayout:
+        orientation: "vertical"
         size_hint: None, None
-        size: "200dp","20dp" #
+        size: "300dp","300dp"
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+        spacing: "70dp"
 
-        pos_hint: {"center_x": 0.5}
+        Label:
+            text: "CHOOSE YOUR NUMBERS"
 
-    NumberDisplay:
+            font_name: "fonts/Roboto.ttf"
+            font_size: "20dp"
 
-    GridLayout:
-        rows: 2
-        cols: 2
-        BoxLayout:
-            padding: [10,10,40,10]
-            Button: 
-                text: "SMALL"   
-                on_press: root.Small() 
-        BoxLayout:
-            padding: [40,10,10,10]
-            Button:
-                text: "BIG"
-                on_press: root.Big()
-        BoxLayout:
-            padding: [10,10,40,10]
-            Button:
-                text: "CLEAR"
-                on_press: root.Clears()
-        BoxLayout:
-            padding: [40,10,10,10]
-            Button: 
-                text: "NEXT"
-                on_press: root.Next()
+            size_hint: None, None
+            size: "200dp","20dp" #
+
+            pos_hint: {"center_x": 0.5}
+
+        NumberDisplay:
+
+        GridLayout:
+            rows: 2
+            cols: 2
+            BoxLayout:
+                padding: [10,10,40,10]
+                Button: 
+                    text: "SMALL"   
+                    on_press: root.Small() 
+            BoxLayout:
+                padding: [40,10,10,10]
+                Button:
+                    text: "BIG"
+                    on_press: root.Big()
+            BoxLayout:
+                padding: [10,10,40,10]
+                Button:
+                    text: "CLEAR"
+                    on_press: root.Clears()
+            BoxLayout:
+                padding: [40,10,10,10]
+                Button: 
+                    text: "NEXT"
+                    on_press: root.Next()
 
 
 <NumberDisplay>:
@@ -57,63 +58,105 @@ Options:
 
     
 <Options>:
+    BoxLayout
+        canvas.before:
+            Color:
+                rgba: 1,1,1,root.light
+            Rectangle: 
+                size: self.size
+                pos: self.pos
+        orientation: "vertical"
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, 0.1
+            Label: 
+                text: "Light Mode"
+                color: (1-root.light),(1-root.light),(1-root.light),1
+
+                size_hint: None,1
+                length: "200dp"
+            Label: #padding only
+            Switch:
+                on_active: root.on_switch(self)
+
+                size_hint: None, 1
+                length: "200dp"
+        Label:
+        Button:
+            text: "Home"
+
+            size_hint: None, None
+            size: "60dp","30dp"
+            on_press: root.go_home()
+
+
+<HomeScreen>:
+    #Forced Method of doing it
     canvas.before:
         Color:
             rgba: 1,1,1,root.light
         Rectangle: 
             size: self.size
             pos: self.pos
-    orientation: "vertical"
-    BoxLayout:
-        orientation: 'horizontal'
-        size_hint: 1, 0.1
-        Label: 
-            text: "Light Mode"
-            color: (1-root.light),(1-root.light),(1-root.light),1
-        Switch:
-            on_active: root.on_switch(self)
-    Label:
+    GridLayout:
+        cols:1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1,None
+            height: "150dp"
+            spacing: "20dp"
+            Label:
+                text:"WELCOME TO GET CLOSEST"
+                
+                font_name: "fonts/Roboto.ttf" #just experimental
+                font_size: "20dp" 
 
+                size_hint: None, None
+                size: "400dp","30dp"
 
-<HomeScreen>:
-    #Forced Method of doing it
-    cols:1
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: 1,None
-        height: "150dp"
-        spacing: "20dp"
-        Label:
-            text:"WELCOME TO GET CLOSEST"
-            
-            font_name: "fonts/Roboto.ttf" #just experimental
-            font_size: "20dp" 
+                pos_hint: {"center_x":0.5}
+            Button:
+                text: "START"
+                
+                on_press: 
+                    root.start()
 
+                size_hint: None, None
+                size: "100dp","30dp"
+
+                pos_hint: {"center_x": .5}
+
+        Label: #just for dynamic padding to get to the bottom
+
+        BoxLayout:
+            orientation: "vertical"
             size_hint: None, None
-            size: "400dp","30dp"
-
-            pos_hint: {"center_x":0.5}
-        Button:
-            text: "START"
-            
-            on_press: root.start()
-
-            size_hint: None, None
-            size: "100dp","30dp"
-
-            pos_hint: {"center_x": .5}
-
-    Label: #just for dynamic padding to get to the bottom
-
-    BoxLayout:
-        orientation: "vertical"
-        size_hint: None, None
-        size: "80dp","50dp"
-        Button:
-            text: "Profile"
-            on_press: root.Profile()
-        Button:
-            text: "Options"
-            on_press: root.Options()
+            size: "80dp","50dp"
+            Button:
+                text: "Profile"
+                on_press: root.Profile()
+            Button:
+                text: "Options"
+                on_press: root.Options()
         
+<Manager>:
+    id: screen_manager
+
+    home: home  #home on the left is an Object and home on the right is id
+    menu: menu
+    options: options
+
+    HomeScreen:
+        id: home
+        name: "home"
+        manager: screen_manager
+
+    MenuScreen:
+        id: menu
+        name: "menu"
+        manager: 
     
+    Options:
+        id: options
+        name: "options"
+        manager:
