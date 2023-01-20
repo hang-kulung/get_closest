@@ -1,63 +1,88 @@
-MenuScreen:
+Options:
 
-<MenuScreen@BoxLayout>:
+<MenuScreen>:
     orientation: "vertical"
     size_hint: None, None
     size: "300dp","300dp"
     pos_hint: {"center_x":0.5,"center_y":0.5}
     spacing: "70dp"
+
     Label:
         text: "CHOOSE YOUR NUMBERS"
+
         font_name: "fonts/Roboto.ttf"
         font_size: "20dp"
 
         size_hint: None, None
-        size: "200dp","20dp"
+        size: "200dp","20dp" #
+
         pos_hint: {"center_x": 0.5}
+
     NumberDisplay:
-    MenuButtons:  
+
+    GridLayout:
+        rows: 2
+        cols: 2
+        BoxLayout:
+            padding: [10,10,40,10]
+            Button: 
+                text: "SMALL"   
+                on_press: root.Small() 
+        BoxLayout:
+            padding: [40,10,10,10]
+            Button:
+                text: "BIG"
+                on_press: root.Big()
+        BoxLayout:
+            padding: [10,10,40,10]
+            Button:
+                text: "CLEAR"
+                on_press: root.Clears()
+        BoxLayout:
+            padding: [40,10,10,10]
+            Button: 
+                text: "NEXT"
+                on_press: root.Next()
+
 
 <NumberDisplay>:
     orientation: "lr-tb"
 
     size_hint: None, None
     size: "220dp","20dp"
-    pos_hint: {"center_x":0.5}
+
     spacing: "30dp"
 
+    pos_hint: {"center_x":0.5}
 
-<MenuButtons>:
-    rows: 2
-    cols: 2
+    
+<Options>:
+    canvas.before:
+        Color:
+            rgba: 1,1,1,root.light
+        Rectangle: 
+            size: self.size
+            pos: self.pos
+    orientation: "vertical"
     BoxLayout:
-        padding: [10,10,40,10]
-        Button: 
-            text: "SMALL"   
-            on_press: root.Small() 
-    BoxLayout:
-        padding: [40,10,10,10]
-        Button:
-            text: "BIG"
-            on_press: root.Big()
-    BoxLayout:
-        padding: [10,10,40,10]
-        Button:
-            text: "CLEAR"
-            on_press: root.Clears()
-    BoxLayout:
-        padding: [40,10,10,10]
-        Button: 
-            text: "NEXT"
-            on_press: root.Next()
+        orientation: 'horizontal'
+        size_hint: 1, 0.1
+        Label: 
+            text: "Light Mode"
+            color: (1-root.light),(1-root.light),(1-root.light),1
+        Switch:
+            on_active: root.on_switch(self)
+    Label:
+
 
 <HomeScreen>:
-    #Force Method of doing it
+    #Forced Method of doing it
     cols:1
     BoxLayout:
         orientation: 'vertical'
         size_hint: 1,None
-        spacing: "20dp"
         height: "150dp"
+        spacing: "20dp"
         Label:
             text:"WELCOME TO GET CLOSEST"
             
@@ -66,6 +91,7 @@ MenuScreen:
 
             size_hint: None, None
             size: "400dp","30dp"
+
             pos_hint: {"center_x":0.5}
         Button:
             text: "START"
@@ -74,9 +100,11 @@ MenuScreen:
 
             size_hint: None, None
             size: "100dp","30dp"
+
             pos_hint: {"center_x": .5}
-    Label:
-        
+
+    Label: #just for dynamic padding to get to the bottom
+
     BoxLayout:
         orientation: "vertical"
         size_hint: None, None
