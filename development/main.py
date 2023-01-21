@@ -2,11 +2,17 @@ from kivy.app import App
 from kivy.properties import NumericProperty,ObjectProperty,StringProperty,BooleanProperty
 from kivy.uix.screenmanager import ScreenManager, Screen,NoTransition
 import random
+import os
 
+working_dir=os.path.dirname(__file__)
+roboto=os.path.join(os.path.dirname(__file__),"fonts\Roboto.ttf")
+lcd=os.path.join(os.path.dirname(__file__),"fonts\Lcd.ttf")
 """Discontinued from this version, progress to be made on the last screen and debugs on it not working on the actual phone."""
 lights=0
 
 class MenuScreen(Screen):
+    Roboto=roboto
+    Lcd=lcd
     light=NumericProperty(0)
     available_numbers=[0]*5
     counter=0
@@ -62,14 +68,12 @@ class Options(Screen):
 
 class HomeScreen(Screen):
     light=NumericProperty(0)
+    Roboto=roboto
     def __init__(self, **kwargs):
         super(HomeScreen, self).__init__(**kwargs)
 
     def on_pre_enter(self, *args):
-        if lights==1:
-            self.light=1
-        else:
-            self.light=0
+        self.light=lights
 
     def start(self):
         #Need s a jumper to page
