@@ -1,6 +1,13 @@
 HomeScreen:
 
 <MenuScreen>:
+    #For Backgorund color
+    canvas.before:
+        Color:
+            rgba: 1,1,1,root.light
+        Rectangle:
+            size: self.size
+
     BoxLayout:
         orientation: "vertical"
         size_hint: None, None
@@ -9,7 +16,9 @@ HomeScreen:
         spacing: "70dp"
 
         Label:
+            id: "Title"
             text: "CHOOSE YOUR NUMBERS"
+            color: (1-root.light),(1-root.light),(1-root.light),1
 
             font_name: "fonts/Roboto.ttf"
             font_size: "20dp"
@@ -19,7 +28,22 @@ HomeScreen:
 
             pos_hint: {"center_x": 0.5}
 
-        NumberDisplay:
+        Label:
+            id: "Number_Display"
+            text: root.numberlabel
+
+            font_name: "fonts/Lcd.ttf"
+            font_size:  "40dp"
+
+            color: (1-root.light),(1-root.light),(1-root.light),1
+
+            size_hint: None, None
+            size: "220dp","20dp"
+
+            spacing: "30dp"
+
+            pos_hint: {"center_x":0.5}
+            
 
         GridLayout:
             rows: 2
@@ -43,18 +67,7 @@ HomeScreen:
                 padding: [40,10,10,10]
                 Button: 
                     text: "NEXT"
-                    on_press: root.Next()
-
-
-<NumberDisplay>:
-    orientation: "lr-tb"
-
-    size_hint: None, None
-    size: "220dp","20dp"
-
-    spacing: "30dp"
-
-    pos_hint: {"center_x":0.5}
+                    on_press: root.Next()   
 
     
 <Options>:
@@ -66,6 +79,7 @@ HomeScreen:
                 size: self.size
                 pos: self.pos
         orientation: "vertical"
+
         BoxLayout:
             orientation: 'horizontal'
             size_hint: 1, 0.1
@@ -82,6 +96,7 @@ HomeScreen:
                 size_hint: None, 1
                 length: "200dp"
         Label:
+        
         Button:
             text: "Home"
 
@@ -107,6 +122,7 @@ HomeScreen:
             spacing: "20dp"
             Label:
                 text:"WELCOME TO GET CLOSEST"
+                color: (1-root.light),(1-root.light),(1-root.light),1
                 
                 font_name: "fonts/Roboto.ttf" #just experimental
                 font_size: "20dp" 

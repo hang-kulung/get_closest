@@ -7,16 +7,14 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen,NoTransition
 
-light=NumericProperty(0)
-class NumberDisplay(StackLayout):
-    #WHY TF did i use stacklayout? it doesn't work with grid layout? why?
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        for i in range(5):
-            l=Label(text="0",size_hint=(None,None),size=("20dp","20dp"),font_name= "fonts/Lcd.ttf",font_size= "30dp")
-            self.add_widget(l)
+lights=0
 
 class MenuScreen(Screen):
+    light=NumericProperty(0)
+    numberdisplay=[0]*5
+    numberlabel='  '.join([str(x) for x in numberdisplay])
+    def on_pre_enter(self, *args):
+        self.light=lights
     def Small(self):
         print("small button pressed")
     def Big(self):
@@ -30,25 +28,34 @@ class Options(Screen):
     light=NumericProperty(0)
     def __init__(self, **kwargs):
         super(Options, self).__init__(**kwargs)
+
+    def on_pre_enter(self, *args):
+        self.light=lights
     #my_text=StringProperty("dark")
     def on_switch(self,Switch):
         if Switch.active==False:
             print("Dark Mode")
+            global lights
+            lights=0
             self.light=0
         else:
             print("Light Mode")
+            lights=1
             self.light=1
     def go_home(self):
         print("Home button pressed")
-        self.manager.get_screen('menu').light=NumericProperty(1)
         self.manager.current='home'
-        
-
 
 class HomeScreen(Screen):
     light=NumericProperty(0)
     def __init__(self, **kwargs):
         super(HomeScreen, self).__init__(**kwargs)
+
+    def on_pre_enter(self, *args):
+        if lights==1:
+            self.light=1
+        else:
+            self.light=0
 
     def start(self):
         #Need s a jumper to page
