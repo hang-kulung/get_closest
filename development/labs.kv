@@ -30,10 +30,10 @@ HomeScreen:
 
         Label:
             id: "Number_Display"
-            text: root.numberlabel
+            text: root.available_numbers_label
 
             font_name: "fonts/Lcd.ttf"
-            font_size:  "40dp"
+            font_size:  "30dp"
 
             color: (1-root.light),(1-root.light),(1-root.light),1
 
@@ -67,7 +67,8 @@ HomeScreen:
                 padding: [40,10,10,10]
                 Button: 
                     text: "NEXT"
-                    on_press: root.Next()   
+                    on_press: root.Next()
+                    disabled: root.enable   
 
     
 <Options>:
@@ -96,7 +97,7 @@ HomeScreen:
                 size_hint: None, 1
                 length: "200dp"
         Label:
-        
+
         Button:
             text: "Home"
 

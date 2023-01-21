@@ -1,26 +1,40 @@
-"""Creating the base of the app, development in the dev branch"""
 from kivy.app import App  
-from kivy.properties import NumericProperty,ObjectProperty
-from kivy.uix.stacklayout import StackLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
+from kivy.properties import NumericProperty,ObjectProperty,StringProperty,BooleanProperty
 from kivy.uix.screenmanager import ScreenManager, Screen,NoTransition
+import random
 
+"""Discontinued from this version, progress to be made on the last screen and debugs on it not working on the actual phone."""
 lights=0
 
 class MenuScreen(Screen):
     light=NumericProperty(0)
-    numberdisplay=[0]*5
-    numberlabel='  '.join([str(x) for x in numberdisplay])
+    available_numbers=[0]*5
+    counter=0
+    enable=BooleanProperty(True)
+    available_numbers_label=StringProperty('  '.join([str(x) for x in available_numbers]))
     def on_pre_enter(self, *args):
         self.light=lights
     def Small(self):
-        print("small button pressed")
+        print("Small button pressed")
+        if self.counter < len(self.available_numbers):
+            self.available_numbers[self.counter] = random.randint(1,9)
+            self.counter+=1
+            self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
+        else:
+            self.enable=False
     def Big(self):
         print("Big button pressed")
+        if self.counter < len(self.available_numbers):
+            self.available_numbers[self.counter] = random.randint(10,99)
+            self.counter+=1
+            self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
+        else:
+            self.enable=False
     def Clears(self):
         print("Clear button pressed")
+        self.available_numbers=[0]*5
+        self.counter=0
+        self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
     def Next(self):
         print("Next button pressed")
 
