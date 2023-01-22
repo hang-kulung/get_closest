@@ -1,5 +1,42 @@
 HomeScreen:
 
+<ResultScreen>:
+    canvas.before: 
+        Color: 
+            rgba: 1,1,1,root.light
+        Rectangle:
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: "10dp"
+        Label:
+            text: "YOU WERE " + str(root.diff)+ " OFF"
+
+            size_hint: 1,None
+            height: "60dp"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1,None
+            height: "40dp"
+            #BoxLayout:
+            Label:
+            Button: 
+                text: "HOME"
+
+                on_press: root.take_me_home_country_roads()
+                size_hint: None, None
+                size: "100dp","40dp"
+            #BoxLayout:
+            Label:
+            Button:
+                text: "AGAIN"
+
+                on_press: root.extrawork()
+                size_hint: None, None
+                size: "100dp","40dp"
+            Label:
+        Label:
+
 <GameScreen>:
     canvas.before: 
         Color: 
@@ -8,6 +45,139 @@ HomeScreen:
             size: self.size
     
     BoxLayout:
+        orientation: 'vertical'
+        padding: [30,20,20,30]
+        spacing: "10dp"
+        Label: 
+            text: "GOAL: "+str(root.goal)
+
+            font_name: "./data/Roboto.ttf"
+            font_size: "20dp"
+
+            size_hint: 1,  None
+            height: "80dp"
+        Label:
+            canvas.before: 
+                Color: 
+                    rgba: 0,1,1,.1
+                Rectangle: 
+                    size: self.size
+                    pos: self.pos
+            text: root.resulting_label
+            
+            size_hint: 1, None
+            height: "80dp"
+        Label:
+        BoxLayout:
+            id: numberspace
+            orientation: 'vertical'
+            spacing: "15dp"
+            size_hint: 1,None
+            height: "200dp"
+            BoxLayout:
+                id: firt_row
+                orientation: 'horizontal'
+                spacing: "5dp"
+                size_hint: 1,None
+                height: "40dp"
+                Button: 
+                    id: availbale_number_five
+                    text: str(root.available_numbers[0])
+                    on_press: root.addcalcone()
+                    disabled: root.disabled_one
+                Button: 
+                    id: available_numbers_four
+                    text: str(root.available_numbers[1])
+                    on_press: root.addcaltwo()
+                    disabled: root.disabled_two
+                Button:
+                    id: available_numbers_three
+                    text: str(root.available_numbers[2])
+                    on_press: root.addcalthree()
+                    disabled: root.disabled_three
+                Button: 
+                    id: available_numbers_two 
+                    text: str(root.available_numbers[3])
+                    on_press: root.addcalfour()
+                    disabled: root.disabled_four
+                Button: 
+                    id: available_numbers_one
+                    text: str(root.available_numbers[4])
+                    on_press: root.addcalfive()
+                    disabled: root.disabled_five
+            BoxLayout:
+                id: second_row
+                orientation: 'horizontal'
+                spacing: "5dp"
+                size_hint: 1,None
+                height: "40dp"
+                BoxLayout:
+                    id: calc_buttons_one
+                    orientation: "horizontal"
+                    spacing: "5dp"
+                    size_hint: .9, 1
+                    Button:
+                        id: plus_button
+                        text: "+"
+
+                        on_press: root.addsymbols("+")
+                    Button: 
+                        id: minus_button
+                        text: "-"
+
+                        on_press: root.addsymbols("-")
+                    Button: 
+                        id: times_button
+                        text: "X"
+
+                        on_press: root.addsymbols("*")
+                Button:
+                    id: clear_button
+                    text: "CLEAR"
+
+                    on_press: root.clear()
+            BoxLayout: 
+                id: third_row
+                orientation: 'horizontal'
+                spacing: "5dp"
+                size_hint: 1,None
+                height: "40dp"
+                BoxLayout:
+                    id: calc_buttons_two
+                    orientation: "horizontal"
+                    spacing: "5dp"
+                    size_hint: .9, 1
+                    Button: 
+                        id: divide_button
+                        text: "/"
+
+                        on_press: root.addsymbols("/")
+                    Button:
+                        id: paranthesis_start_button
+                        text:"("
+
+                        on_press: root.addsymbols("(")
+                    Button: 
+                        id: paranthesis_close_button
+                        text: ")"
+
+                        on_press: root.addsymbols(")")
+                Button: 
+                    id: equal_button
+                    text: "="
+
+                    on_press: root.equals()
+        Button: 
+            id: submit
+            text: "Submit"
+            size_hint: None, None
+            size: "100dp","40dp"
+            pos_hint: {"center_x": 0.5}
+
+            on_press: root.submit()
+        Label:
+
+
 
 <MenuScreen>:
     #For Backgorund color
@@ -25,7 +195,7 @@ HomeScreen:
         spacing: "70dp"
 
         Label:
-            id: "Title"
+            id: Title
             text: "CHOOSE YOUR NUMBERS"
             color: (1-root.light),(1-root.light),(1-root.light),1
 
@@ -38,7 +208,7 @@ HomeScreen:
             pos_hint: {"center_x": 0.5}
 
         Label:
-            id: "Number_Display"
+            id: Number_Display
             text: root.available_numbers_label
 
             font_name: "./data/Lcd.ttf"
@@ -172,6 +342,7 @@ HomeScreen:
     menu: menu
     options: options
     game: game
+    result: result
 
     HomeScreen:
         id: home
@@ -191,4 +362,9 @@ HomeScreen:
     GameScreen:
         id: game
         name: "game"
+        manager:
+    
+    ResultScreen:
+        id: result
+        name: "result"
         manager:

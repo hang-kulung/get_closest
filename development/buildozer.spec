@@ -29,7 +29,7 @@ source.include_patterns = assets/*,images/*.png
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.4
+version = 0.6
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -89,8 +89,8 @@ fullscreen = 0
 #android.presplash_lottie = "path/to/lottie/file.json"
 
 # (str) Adaptive icon of the application (used if Android API level is 26+ at runtime)
-#icon.adaptive_foreground.filename = %(source.dir)s/data/icon_fg.png
-#icon.adaptive_background.filename = %(source.dir)s/data/icon_bg.png
+icon.adaptive_foreground.filename = %(source.dir)s/data/icon.png
+icon.adaptive_background.filename = %(source.dir)s/data/icon.png
 
 # (list) Permissions
 #android.permissions = INTERNET
