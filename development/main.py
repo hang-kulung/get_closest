@@ -4,21 +4,38 @@ from kivy.uix.screenmanager import ScreenManager, Screen,NoTransition
 import random
 import os
 
-"""Discontinued from this version, progress to be made on the last screen and debugs on it not working on the actual phone."""
 lights=0
+available_numbers_global=[0]*5
+
+class GameScreen(Screen):
+    light=NumericProperty(0)
+    available_numbers=available_numbers_global
+    
+    def on_pre_enter(self, *args):
+        self.light=lights
+        self.available_numbers=available_numbers_global
+
 
 class MenuScreen(Screen):
     light=NumericProperty(0)
-    available_numbers=[0]*5
+    available_numbers=available_numbers_global
     counter=0
     enable=BooleanProperty(True)
     available_numbers_label=StringProperty('  '.join([str(x) for x in available_numbers]))
+    
+    def __init__(self, **kwargs):
+        super(MenuScreen, self).__init__(**kwargs)
+    
     def on_pre_enter(self, *args):
         self.light=lights
+        self.available_numbers=available_numbers_global
+
     def Small(self):
         print("Small button pressed")
         if self.counter < len(self.available_numbers):
+            global available_numbers_global
             self.available_numbers[self.counter] = random.randint(1,9)
+            available_numbers_global=self.available_numbers
             self.counter+=1
             self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
         else:
@@ -26,18 +43,23 @@ class MenuScreen(Screen):
     def Big(self):
         print("Big button pressed")
         if self.counter < len(self.available_numbers):
+            global available_numbers_global
             self.available_numbers[self.counter] = random.randint(10,99)
+            available_numbers_global=self.available_numbers
             self.counter+=1
             self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
         else:
             self.enable=False
     def Clears(self):
+        global available_numbers_global
         print("Clear button pressed")
         self.available_numbers=[0]*5
+        available_numbers_global=self.available_numbers
         self.counter=0
         self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
     def Next(self):
         print("Next button pressed")
+        self.manager.current='game'
 
 class Options(Screen):
     light=NumericProperty(0)
@@ -86,6 +108,7 @@ class Manager(ScreenManager):
     home = ObjectProperty(None)
     menu = ObjectProperty(None)
     options = ObjectProperty(None)
+    game = ObjectProperty(None)
 
 class LabsApp(App):
     def build(self):

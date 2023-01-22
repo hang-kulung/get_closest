@@ -1,5 +1,14 @@
 HomeScreen:
 
+<GameScreen>:
+    canvas.before: 
+        Color: 
+            rgba: 1,1,1,root.light
+        Rectangle:
+            size: self.size
+    
+    BoxLayout:
+
 <MenuScreen>:
     #For Backgorund color
     canvas.before:
@@ -20,7 +29,7 @@ HomeScreen:
             text: "CHOOSE YOUR NUMBERS"
             color: (1-root.light),(1-root.light),(1-root.light),1
 
-            font_name: "./Roboto.ttf"
+            font_name: "./data/Roboto.ttf"
             font_size: "20dp"
 
             size_hint: None, None
@@ -32,7 +41,7 @@ HomeScreen:
             id: "Number_Display"
             text: root.available_numbers_label
 
-            font_name: "./Lcd.ttf"
+            font_name: "./data/Lcd.ttf"
             font_size:  "30dp"
 
             color: (1-root.light),(1-root.light),(1-root.light),1
@@ -125,7 +134,7 @@ HomeScreen:
                 text:"WELCOME TO GET CLOSEST"
                 color: (1-root.light),(1-root.light),(1-root.light),1
                 
-                font_name: "./Roboto.ttf" #just experimental
+                font_name: "./data/Roboto.ttf" #just experimental
                 font_size: "20dp" 
 
                 size_hint: None, None
@@ -162,6 +171,7 @@ HomeScreen:
     home: home  #home on the left is an Object and home on the right is id
     menu: menu
     options: options
+    game: game
 
     HomeScreen:
         id: home
@@ -176,4 +186,9 @@ HomeScreen:
     Options:
         id: options
         name: "options"
+        manager:
+
+    GameScreen:
+        id: game
+        name: "game"
         manager:
