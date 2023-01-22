@@ -147,6 +147,7 @@ class MenuScreen(Screen):
         self.manager.current='game' 
 
 class Options(Screen):
+    light=NumericProperty(0)
     def on_pre_enter(self):
         self.light=lights
 
