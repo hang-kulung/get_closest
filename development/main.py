@@ -13,6 +13,7 @@ class ResultScreen(Screen):
     #Instantiating necessary as the root. variable in kv was taken from the scope of the class
     light=NumericProperty(0)
     diff=NumericProperty(0)
+    last_label=StringProperty('')
     background=StringProperty('')
 
     #runs on Screen call
@@ -23,6 +24,13 @@ class ResultScreen(Screen):
             self.background="./data/background_light.jpg"
         else:
             self.background="./data/background_dark.jpg"
+
+        if abs(self.diff)>=10:
+            self.last_label="YOU WERE " + str(self.diff)+ " OFF"
+        elif abs(self.diff)==0:
+            self.last_label=f"WINNER!!"
+        else:
+            self.last_label=f"VERY CLOSE (Diff:{self.diff})"
 
     def take_me_home_country_roads(self):
         global available_numbers_global
