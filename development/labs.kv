@@ -1,11 +1,13 @@
 HomeScreen:
 
 <ResultScreen>:
-    canvas.before: 
-        Color: 
-            rgba: 1,1,1,root.light
-        Rectangle:
+    canvas.before:
+        Rectangle: 
             size: self.size
+            pos: self.pos
+            source: root.background
+        Color:
+            rgba: 1,1,1,root.light
     BoxLayout:
         orientation: 'vertical'
         spacing: "10dp"
@@ -43,11 +45,13 @@ HomeScreen:
         Label:
 
 <GameScreen>:
-    canvas.before: 
-        Color: 
-            rgba: 1,1,1,root.light
-        Rectangle:
+    canvas.before:
+        Rectangle: 
             size: self.size
+            pos: self.pos
+            source: root.background
+        Color:
+            rgba: 1,1,1,root.light
     
     BoxLayout:
         orientation: 'vertical'
@@ -191,6 +195,8 @@ HomeScreen:
             size: "100dp","40dp"
             pos_hint: {"center_x": 0.5}
 
+            disabled:not root.enable_submit
+
             on_press: root.submit()
         Label:
 
@@ -199,10 +205,12 @@ HomeScreen:
 <MenuScreen>:
     #For Backgorund color
     canvas.before:
+        Rectangle: 
+            size: self.size
+            pos: self.pos
+            source: root.background
         Color:
             rgba: 1,1,1,root.light
-        Rectangle:
-            size: self.size
 
     BoxLayout:
         orientation: "vertical"
@@ -268,6 +276,13 @@ HomeScreen:
 
     
 <Options>:
+    canvas.before:
+        Rectangle: 
+            size: self.size
+            pos: self.pos
+            source: root.background
+        Color:
+            rgba: 1,1,1,root.light
     BoxLayout
         orientation: "vertical"
         canvas.before:
@@ -305,13 +320,13 @@ HomeScreen:
 
 
 <HomeScreen>:
-    #Forced Method of doing it
     canvas.before:
-        Color:
-            rgba: 1,1,1,root.light
         Rectangle: 
             size: self.size
             pos: self.pos
+            source: root.background
+        Color:
+            rgba: 1,1,1,root.light
     GridLayout:
         cols:1
         BoxLayout:
