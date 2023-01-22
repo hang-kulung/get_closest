@@ -53,8 +53,10 @@ HomeScreen:
         orientation: 'vertical'
         padding: [30,20,20,30]
         spacing: "10dp"
+
         Label: 
             text: "GOAL: "+str(root.goal)
+
             color: (1-root.light),(1-root.light),(1-root.light),1
 
             font_name: "./data/Roboto.ttf"
@@ -62,13 +64,16 @@ HomeScreen:
 
             size_hint: 1,  None
             height: "80dp"
+
         Label:
+            #for the color
             canvas.before: 
                 Color: 
                     rgba: 0,1,1,.1
                 Rectangle: 
                     size: self.size
                     pos: self.pos
+
             text: root.resulting_label
 
             color: (1-root.light),(1-root.light),(1-root.light),1
@@ -146,7 +151,8 @@ HomeScreen:
                     id: clear_button
                     text: "CLEAR"
 
-                    on_press: root.clear()
+                    on_press: root.Clear()
+
             BoxLayout: 
                 id: third_row
                 orientation: 'horizontal'
@@ -252,7 +258,7 @@ HomeScreen:
                 padding: [10,10,40,10]
                 Button:
                     text: "CLEAR"
-                    on_press: root.Clears()
+                    on_press: root.Clear()
             BoxLayout:
                 padding: [40,10,10,10]
                 Button: 
@@ -273,8 +279,9 @@ HomeScreen:
         BoxLayout:
             padding: [20,20,20,20]
             orientation: 'horizontal'
-            size_hint: 1, None
+            size_hint: 0.9, None
             height: "60dp"
+            pos_hint: {"center_x":0.5}
             Label: 
                 text: "Light Mode"
                 color: (1-root.light),(1-root.light),(1-root.light),1
@@ -294,7 +301,7 @@ HomeScreen:
 
             size_hint: None, None
             size: "60dp","30dp"
-            on_press: root.go_home()
+            on_press: root.take_me_home_country_roads()
 
 
 <HomeScreen>:
@@ -343,6 +350,7 @@ HomeScreen:
             Button:
                 text: "Profile"
                 on_press: root.Profile()
+                disabled: "True"
             Button:
                 text: "Options"
                 on_press: root.Options()

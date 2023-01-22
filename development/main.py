@@ -2,7 +2,6 @@ from kivy.app import App
 from kivy.properties import NumericProperty,ObjectProperty,StringProperty,BooleanProperty,ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen,NoTransition
 import random
-import os
 
 lights=0
 available_numbers_global=[0]*5
@@ -20,15 +19,21 @@ class ResultScreen(Screen):
         global available_numbers_global
         available_numbers_global=[0]*5
         self.manager.current='home'
+        #MY SAVIOR
+        self.manager.get_screen("menu").Clear()
+        self.manager.get_screen("game").Clear()
 
     def extrawork(self):
         self.manager.current='menu'
+        self.manager.get_screen("menu").Clear()
+        self.manager.get_screen("game").Clear()
 
 class GameScreen(Screen):
     light=NumericProperty(0)
     goal=NumericProperty(0)
     resulting_label=StringProperty('')
     available_numbers=ListProperty(available_numbers_global)
+    
     disabled_one=BooleanProperty(False)
     disabled_two=BooleanProperty(False)
     disabled_three=BooleanProperty(False)
@@ -42,7 +47,7 @@ class GameScreen(Screen):
 
     def on_leave(self):
         self.goal=random.randint(100, 999)
-        GameScreen().clear()
+        GameScreen().Clear()
         
     #all numbers
     def addcalcone(self):
@@ -77,7 +82,7 @@ class GameScreen(Screen):
         print(self.resulting_label)
 
     #all functions
-    def clear(self):
+    def Clear(self):
         print("clear button pressed")
         self.disabled_one=False
         self.disabled_two=False
@@ -108,7 +113,7 @@ class MenuScreen(Screen):
         self.light=lights
         print(f"value of temp {self.temp} and {available_numbers_global} compared")
         if self.temp==available_numbers_global:
-            MenuScreen().Clears()
+            MenuScreen().Clear()
         else:
             self.available_numbers=available_numbers_global
 
@@ -134,7 +139,7 @@ class MenuScreen(Screen):
         else:
             self.enable=False
 
-    def Clears(self):
+    def Clear(self):
         global available_numbers_global
         print("Clear button pressed")
         self.available_numbers=[0]*5
@@ -162,7 +167,7 @@ class Options(Screen):
             lights=1
             self.light=1
 
-    def go_home(self):
+    def take_me_home_country_roads(self):
         print("Home button pressed")
         self.manager.current='home'
 
