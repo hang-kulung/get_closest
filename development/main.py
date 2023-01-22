@@ -12,10 +12,7 @@ class ResultScreen(Screen):
     light=NumericProperty(0)
     diff=NumericProperty(0)
 
-    def __init__(self, **kwargs):
-        super(ResultScreen, self).__init__(**kwargs)
-
-    def on_pre_enter(self, *args):
+    def on_pre_enter(self,):
         self.light=lights
         self.diff=diffs
 
@@ -38,18 +35,15 @@ class GameScreen(Screen):
     disabled_four=BooleanProperty(False)
     disabled_five=BooleanProperty(False)
 
-    def __init__(self, **kwargs):
-        super(GameScreen, self).__init__(**kwargs)
-
-    def on_pre_enter(self, *args):
+    def on_pre_enter(self):
         self.light=lights
         self.available_numbers=available_numbers_global
         self.goal=random.randint(100, 999)
 
-    def on_leave(self, *args):
-        global available_numbers_global
-        self.available_numbers=[0]*5
+    def on_leave(self):
         self.goal=random.randint(100, 999)
+        GameScreen().clear()
+        
     #all numbers
     def addcalcone(self):
         self.disabled_one=True
@@ -106,15 +100,17 @@ class MenuScreen(Screen):
     light=NumericProperty(0)
     available_numbers=ListProperty(0)
     counter=0
+    temp=[]
     enable=BooleanProperty(True)
     available_numbers_label=StringProperty('  '.join([str(x) for x in available_numbers_global]))
     
-    def __init__(self, **kwargs):
-        super(MenuScreen, self).__init__(**kwargs)
-    
-    def on_pre_enter(self, *args):
+    def on_pre_enter(self):
         self.light=lights
-        self.available_numbers=available_numbers_global
+        print(f"value of temp {self.temp} and {available_numbers_global} compared")
+        if self.temp==available_numbers_global:
+            MenuScreen().Clears()
+        else:
+            self.available_numbers=available_numbers_global
 
     def Small(self):
         print("Small button pressed")
@@ -126,6 +122,7 @@ class MenuScreen(Screen):
             self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
         else:
             self.enable=False
+
     def Big(self):
         print("Big button pressed")
         if self.counter < len(self.available_numbers):
@@ -136,6 +133,7 @@ class MenuScreen(Screen):
             self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
         else:
             self.enable=False
+
     def Clears(self):
         global available_numbers_global
         print("Clear button pressed")
@@ -143,18 +141,15 @@ class MenuScreen(Screen):
         available_numbers_global=self.available_numbers
         self.counter=0
         self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
+    
     def Next(self):
         print("Next button pressed")
-        self.manager.current='game'
+        self.manager.current='game' 
 
 class Options(Screen):
-    light=NumericProperty(0)
-    def __init__(self, **kwargs):
-        super(Options, self).__init__(**kwargs)
-
-    def on_pre_enter(self, *args):
+    def on_pre_enter(self):
         self.light=lights
-    #my_text=StringProperty("dark")
+
     def on_switch(self,Switch):
         if Switch.active==False:
             print("Dark Mode")
@@ -165,39 +160,33 @@ class Options(Screen):
             print("Light Mode")
             lights=1
             self.light=1
+
     def go_home(self):
         print("Home button pressed")
         self.manager.current='home'
 
 class HomeScreen(Screen):
     light=NumericProperty(0)
-    def __init__(self, **kwargs):
-        super(HomeScreen, self).__init__(**kwargs)
 
-    def on_pre_enter(self, *args):
+    def on_pre_enter(self):
         self.light=lights
 
     def start(self):
-        #Need s a jumper to page
         self.manager.current = 'menu'
         print("start button pressed")
     def Profile(self):
-        #Needs a jumper to page
         print("Profile Button Pressed")
-        pass
+        
     def Options(self):
         self.manager.current="options"
         print("Options button Pressed")
-        #Needs a jumper to page
-        pass
+
 class Manager(ScreenManager):  
     home = ObjectProperty(None)
     menu = ObjectProperty(None)
     options = ObjectProperty(None)
     game = ObjectProperty(None)
     result = ObjectProperty(None)
-
-
 
 class LabsApp(App):
     def build(self):

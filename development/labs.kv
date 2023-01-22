@@ -12,6 +12,11 @@ HomeScreen:
         Label:
             text: "YOU WERE " + str(root.diff)+ " OFF"
 
+            color: (1-root.light),(1-root.light),(1-root.light),1
+
+            font_name: "./data/Roboto.ttf"
+            font_size: "20dp"
+            
             size_hint: 1,None
             height: "60dp"
         BoxLayout:
@@ -50,6 +55,7 @@ HomeScreen:
         spacing: "10dp"
         Label: 
             text: "GOAL: "+str(root.goal)
+            color: (1-root.light),(1-root.light),(1-root.light),1
 
             font_name: "./data/Roboto.ttf"
             font_size: "20dp"
@@ -64,6 +70,11 @@ HomeScreen:
                     size: self.size
                     pos: self.pos
             text: root.resulting_label
+
+            color: (1-root.light),(1-root.light),(1-root.light),1
+
+            font_name: "./data/Lcd.ttf"
+            font_size: "20dp"
             
             size_hint: 1, None
             height: "80dp"
@@ -252,17 +263,18 @@ HomeScreen:
     
 <Options>:
     BoxLayout
+        orientation: "vertical"
         canvas.before:
             Color:
                 rgba: 1,1,1,root.light
             Rectangle: 
                 size: self.size
-                pos: self.pos
-        orientation: "vertical"
 
         BoxLayout:
+            padding: [20,20,20,20]
             orientation: 'horizontal'
-            size_hint: 1, 0.1
+            size_hint: 1, None
+            height: "60dp"
             Label: 
                 text: "Light Mode"
                 color: (1-root.light),(1-root.light),(1-root.light),1
