@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.properties import NumericProperty,ObjectProperty,StringProperty,BooleanProperty,ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen,NoTransition
 import random
+from time import sleep
 
 #global variable sthat will be checked upon
 lights=0
@@ -112,14 +113,22 @@ class GameScreen(Screen):
         self.resulting_label=''
     
     def equals(self):
-        self.resulting_label=str(eval(self.resulting_label))
+        try:
+            self.resulting_label=str(eval(self.resulting_label))
+        except SyntaxError:
+            print("syntax error")
+            self.resulting_label=""
         print(self.resulting_label)
 
     def submit(self):
         global diffs
-        diffs=self.goal-eval(self.resulting_label)
-        print(diffs)
-        self.manager.current='result'
+        try:
+            diffs=self.goal-eval(self.resulting_label)
+            print(diffs)
+            self.manager.current='result'
+        except SyntaxError:
+            self.resulting_label=""
+            print("SyntaxError")
 
 class MenuScreen(Screen):
     light=NumericProperty(0)
