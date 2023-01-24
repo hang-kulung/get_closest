@@ -194,10 +194,7 @@ class Options(Screen):
     background=StringProperty('')
     def on_pre_enter(self):
         self.light=lights
-        if self.light==1:
-            self.background="./data/background_light.jpg"
-        else:
-            self.background="./data/background_dark.jpg"
+        self.background="./data/background_dark.jpg"
 
     def on_switch(self,Switch):
         if Switch.active==False:
