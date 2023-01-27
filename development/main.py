@@ -27,11 +27,9 @@ class ResultScreen(Screen):
             self.last_label=f"VERY CLOSE (Diff:{self.diff})"
 
     def take_me_home_country_roads(self):
-        global available_numbers_global
-        available_numbers_global=[0]*5
         self.manager.current='home'
-        self.manager.get_screen("home").on_pre_enter(self.light)
         #MY SAVIOR
+        self.manager.get_screen("home").on_pre_enter(self.light)
         self.manager.get_screen("menu").Clear()
         self.manager.get_screen("game").Clear()
 
@@ -45,7 +43,7 @@ class GameScreen(Screen):
     light=NumericProperty(0)
     goal=NumericProperty(0)
     resulting_label=StringProperty('')
-    available_numbers=ListProperty(available_numbers_global)
+    available_numbers=ListProperty([0]*5)
     background=StringProperty('')
     
     disabled_one=BooleanProperty(False)
@@ -70,34 +68,34 @@ class GameScreen(Screen):
         
     #all numbers
     def addcalcone(self):
+        self.resulting_label+=str(self.available_numbers[0])        
         self.disabled_one=True
-        self.resulting_label+=str(self.available_numbers[0])
-        print(self.resulting_label)
         self.enable_submit=True
+        print(self.resulting_label)
 
     def addcaltwo(self):
-        self.disabled_two=True
         self.resulting_label+=str(self.available_numbers[1])
-        print(self.resulting_label)
+        self.disabled_two=True
         self.enable_submit=True
+        print(self.resulting_label)
 
     def addcalthree(self):
-        self.disabled_three=True
         self.resulting_label+=str(self.available_numbers[2])
+        self.disabled_three=True
+        self.enable_submit=True 
         print(self.resulting_label)
-        self.enable_submit=True
 
     def addcalfour(self):
-        self.disabled_four=True
         self.resulting_label+=str(self.available_numbers[3])
-        print(self.resulting_label)
+        self.disabled_four=True
         self.enable_submit=True
+        print(self.resulting_label)
 
     def addcalfive(self):
-        self.disabled_five=True
         self.resulting_label+=str(self.available_numbers[4])
-        print(self.resulting_label)
+        self.disabled_five=True
         self.enable_submit=True
+        print(self.resulting_label)
 
     #all symbols
     def addsymbols(self,type):
@@ -127,7 +125,6 @@ class GameScreen(Screen):
     def submit(self):
         try:
             diffs=self.goal-eval(self.resulting_label)
-            print(diffs)
             self.manager.current='result'
             self.manager.get_screen('result').on_pre_enter(self.light,diffs)
         except SyntaxError:
@@ -136,11 +133,12 @@ class GameScreen(Screen):
 
 class MenuScreen(Screen):
     light=NumericProperty(0)
-    available_numbers=ListProperty(0)
+    available_numbers=ListProperty([0]*5)
     background=StringProperty("./data/background_dark.jpg")
     counter=0
     enable=BooleanProperty(True)
-    available_numbers_label=StringProperty('  '.join([str(x) for x in available_numbers_global]))
+    #list property is not iterable error when trying to cvonvert the list into string
+    available_numbers_label=StringProperty('0  0  0  0  0')
     
     def on_pre_enter(self,light=0,available_numbers=[0]*5):
         self.light=light
@@ -186,15 +184,21 @@ class Options(Screen):
     background=StringProperty('')
     def on_pre_enter(self,light=0):
         self.light=light
-        self.background="./data/background_dark.jpg"
+        if self.light==1:
+            self.background="./data/background_light.jpg"
+        else:
+            self.background="./data/background_dark.jpg"
 
     def on_switch(self,Switch):
         if Switch.active==False:
             print("Dark Mode")
             self.light=0
+            #To refresh the screen
+            self.manager.get_screen('options').on_pre_enter(self.light)
         else:
             print("Light Mode")
             self.light=1
+            self.manager.get_screen('options').on_pre_enter(self.light)
 
     def take_me_home_country_roads(self):
         print("Home button pressed")
@@ -216,6 +220,7 @@ class HomeScreen(Screen):
         print("start button pressed")
         self.manager.current = 'menu'
         self.manager.get_screen('menu').on_pre_enter(self.light)
+
     def Profile(self):
         print("Profile Button Pressed")
         
