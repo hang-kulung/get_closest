@@ -2,12 +2,6 @@ from kivy.app import App
 from kivy.properties import NumericProperty,ObjectProperty,StringProperty,BooleanProperty,ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen,NoTransition
 import random
-from time import sleep
-
-#global variable sthat will be checked upon
-lights=0
-available_numbers_global=[0]*5
-diffs=0
 
 class ResultScreen(Screen):
     #Instantiating necessary as the root. variable in kv was taken from the scope of the class
@@ -17,8 +11,8 @@ class ResultScreen(Screen):
     background=StringProperty('')
 
     #runs on Screen call
-    def on_pre_enter(self,):
-        self.light=lights
+    def on_pre_enter(self,light=0,diffs=0):
+        self.light=light
         self.diff=diffs
         if self.light==1:
             self.background="./data/background_light.jpg"
@@ -36,12 +30,14 @@ class ResultScreen(Screen):
         global available_numbers_global
         available_numbers_global=[0]*5
         self.manager.current='home'
+        self.manager.get_screen("home").on_pre_enter(self.light)
         #MY SAVIOR
         self.manager.get_screen("menu").Clear()
         self.manager.get_screen("game").Clear()
 
     def extrawork(self):
         self.manager.current='menu'
+        self.manager.get_screen("menu").on_pre_enter(self.light)
         self.manager.get_screen("menu").Clear()
         self.manager.get_screen("game").Clear()
 
@@ -59,9 +55,9 @@ class GameScreen(Screen):
     disabled_five=BooleanProperty(False)
     enable_submit=BooleanProperty(False)
 
-    def on_pre_enter(self):
-        self.light=lights
-        self.available_numbers=available_numbers_global
+    def on_pre_enter(self,light=0,available_numbers=[0]*5):
+        self.light=light
+        self.available_numbers=available_numbers
         self.goal=random.randint(100, 999)
         if self.light==1:
             self.background="./data/background_light.jpg"
@@ -129,11 +125,11 @@ class GameScreen(Screen):
         print(self.resulting_label)
 
     def submit(self):
-        global diffs
         try:
             diffs=self.goal-eval(self.resulting_label)
             print(diffs)
             self.manager.current='result'
+            self.manager.get_screen('result').on_pre_enter(self.light,diffs)
         except SyntaxError:
             self.resulting_label=""
             print("SyntaxError")
@@ -146,9 +142,9 @@ class MenuScreen(Screen):
     enable=BooleanProperty(True)
     available_numbers_label=StringProperty('  '.join([str(x) for x in available_numbers_global]))
     
-    def on_pre_enter(self):
-        self.light=lights
-        self.available_numbers=available_numbers_global
+    def on_pre_enter(self,light=0,available_numbers=[0]*5):
+        self.light=light
+        self.available_numbers=available_numbers
         if self.light==1:
             self.background="./data/background_light.jpg"
         else:
@@ -157,12 +153,10 @@ class MenuScreen(Screen):
     def Small(self):
         print("Small button pressed")
         #Forced to write this because it needs another instance of button click to actually have a change in the state
-        if self.counter ==4:
+        if self.counter==4:
             self.enable=False
         if self.counter < len(self.available_numbers):
-            global available_numbers_global
             self.available_numbers[self.counter] = random.randint(1,9)
-            available_numbers_global=self.available_numbers
             self.counter+=1
             self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
 
@@ -171,17 +165,13 @@ class MenuScreen(Screen):
         if self.counter==4:
             self.enable=False
         if self.counter < len(self.available_numbers):
-            global available_numbers_global
             self.available_numbers[self.counter] = random.randint(10,99)
-            available_numbers_global=self.available_numbers
             self.counter+=1
             self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
 
     def Clear(self):
-        global available_numbers_global
         print("Clear button pressed")
         self.available_numbers=[0]*5
-        available_numbers_global=self.available_numbers
         self.enable=True
         self.counter=0
         self.available_numbers_label='  '.join([str(x) for x in self.available_numbers])
@@ -189,48 +179,51 @@ class MenuScreen(Screen):
     def Next(self):
         print("Next button pressed")
         self.manager.current='game' 
+        self.manager.get_screen('game').on_pre_enter(self.light,self.available_numbers)
+
 class Options(Screen):
     light=NumericProperty(0)
     background=StringProperty('')
-    def on_pre_enter(self):
-        self.light=lights
+    def on_pre_enter(self,light=0):
+        self.light=light
         self.background="./data/background_dark.jpg"
 
     def on_switch(self,Switch):
         if Switch.active==False:
             print("Dark Mode")
-            global lights
-            lights=0
             self.light=0
         else:
             print("Light Mode")
-            lights=1
             self.light=1
 
     def take_me_home_country_roads(self):
         print("Home button pressed")
         self.manager.current='home'
+        self.manager.get_screen('home').on_pre_enter(self.light)
 
 class HomeScreen(Screen):
     light=NumericProperty(0)
     background=StringProperty('')
 
-    def on_pre_enter(self):
-        self.light=lights
+    def on_pre_enter(self,light=0):
+        self.light=light
         if self.light==1:
             self.background="./data/background_light.jpg"
         else:
             self.background="./data/background_dark.jpg"
 
     def start(self):
-        self.manager.current = 'menu'
         print("start button pressed")
+        self.manager.current = 'menu'
+        self.manager.get_screen('menu').on_pre_enter(self.light)
     def Profile(self):
         print("Profile Button Pressed")
         
     def Options(self):
-        self.manager.current="options"
         print("Options button Pressed")
+        self.manager.current="options"
+        self.manager.get_screen('options').on_pre_enter(self.light)
+        
 
 class Manager(ScreenManager):  
     home = ObjectProperty(None)
