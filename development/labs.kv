@@ -1,0 +1,399 @@
+HomeScreen:
+
+<ResultScreen>:
+    canvas.before:
+        Rectangle: 
+            size: self.size
+            pos: self.pos
+            source: root.background
+        Color:
+            rgba: 1,1,1,root.light
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: "10dp"
+        Label:
+            text: root.last_label
+
+            color: (1-root.light),(1-root.light),(1-root.light),1
+
+            font_name: "./data/Roboto.ttf"
+            font_size: "20dp"
+            
+            size_hint: 1,None
+            height: "60dp"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1,None
+            height: "40dp"
+            #BoxLayout:
+            Label:
+            Button: 
+                text: "HOME"
+
+                on_press: root.take_me_home_country_roads()
+                size_hint: None, None
+                size: "100dp","40dp"
+            #BoxLayout:
+            Label:
+            Button:
+                text: "AGAIN"
+
+                on_press: root.extrawork()
+                size_hint: None, None
+                size: "100dp","40dp"
+            Label:
+        Label:
+
+<GameScreen>:
+    canvas.before:
+        Rectangle: 
+            size: self.size
+            pos: self.pos
+            source: root.background
+        Color:
+            rgba: 1,1,1,root.light
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [30,20,20,30]
+        spacing: "10dp"
+
+        Label: 
+            text: "GOAL: "+str(root.goal)
+
+            color: (1-root.light),(1-root.light),(1-root.light),1
+
+            font_name: "./data/Roboto.ttf"
+            font_size: "20dp"
+
+            size_hint: 1,  None
+            height: "80dp"
+
+        Label:
+            #for the color
+            canvas.before: 
+                Color: 
+                    rgba: 0,1,1,.1
+                Rectangle: 
+                    size: self.size
+                    pos: self.pos
+
+            text: root.resulting_label
+
+            color: (1-root.light),(1-root.light),(1-root.light),1
+
+            font_name: "./data/Lcd.ttf"
+            font_size: "20dp"
+            
+            size_hint: 1, None
+            height: "80dp"
+        Label:
+        BoxLayout:
+            id: numberspace
+            orientation: 'vertical'
+            spacing: "15dp"
+            size_hint: 1,None
+            height: "200dp"
+            BoxLayout:
+                id: firt_row
+                orientation: 'horizontal'
+                spacing: "5dp"
+                size_hint: 1,None
+                height: "40dp"
+                Button: 
+                    id: availbale_number_five
+                    text: str(root.available_numbers[0])
+                    on_press: root.addcalcone()
+                    disabled: root.disabled_one
+                Button: 
+                    id: available_numbers_four
+                    text: str(root.available_numbers[1])
+                    on_press: root.addcaltwo()
+                    disabled: root.disabled_two
+                Button:
+                    id: available_numbers_three
+                    text: str(root.available_numbers[2])
+                    on_press: root.addcalthree()
+                    disabled: root.disabled_three
+                Button: 
+                    id: available_numbers_two 
+                    text: str(root.available_numbers[3])
+                    on_press: root.addcalfour()
+                    disabled: root.disabled_four
+                Button: 
+                    id: available_numbers_one
+                    text: str(root.available_numbers[4])
+                    on_press: root.addcalfive()
+                    disabled: root.disabled_five
+            BoxLayout:
+                id: second_row
+                orientation: 'horizontal'
+                spacing: "5dp"
+                size_hint: 1,None
+                height: "40dp"
+                BoxLayout:
+                    id: calc_buttons_one
+                    orientation: "horizontal"
+                    spacing: "5dp"
+                    size_hint: .9, 1
+                    Button:
+                        id: plus_button
+                        text: "+"
+
+                        on_press: root.addsymbols("+")
+                    Button: 
+                        id: minus_button
+                        text: "-"
+
+                        on_press: root.addsymbols("-")
+                    Button: 
+                        id: times_button
+                        text: "X"
+
+                        on_press: root.addsymbols("*")
+                Button:
+                    id: clear_button
+                    text: "CLEAR"
+
+                    on_press: root.Clear()
+
+            BoxLayout: 
+                id: third_row
+                orientation: 'horizontal'
+                spacing: "5dp"
+                size_hint: 1,None
+                height: "40dp"
+                BoxLayout:
+                    id: calc_buttons_two
+                    orientation: "horizontal"
+                    spacing: "5dp"
+                    size_hint: .9, 1
+                    Button: 
+                        id: divide_button
+                        text: "/"
+
+                        on_press: root.addsymbols("/")
+                    Button:
+                        id: paranthesis_start_button
+                        text:"("
+
+                        on_press: root.addsymbols("(")
+                    Button: 
+                        id: paranthesis_close_button
+                        text: ")"
+
+                        on_press: root.addsymbols(")")
+                Button: 
+                    id: equal_button
+                    text: "="
+
+                    on_press: root.equals()
+        Button: 
+            id: submit
+            text: "Submit"
+            size_hint: None, None
+            size: "100dp","40dp"
+            pos_hint: {"center_x": 0.5}
+
+            disabled:not root.enable_submit
+
+            on_press: root.submit()
+        Label:
+
+
+
+<MenuScreen>:
+    #For Backgorund color
+    canvas.before:
+        Rectangle: 
+            size: self.size
+            pos: self.pos
+            source: root.background
+        Color:
+            rgba: 1,1,1,root.light
+
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: None, None
+        size: "300dp","300dp"
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+        spacing: "70dp"
+
+        Label:
+            id: Title
+            text: "CHOOSE YOUR NUMBERS"
+            color: (1-root.light),(1-root.light),(1-root.light),1
+
+            font_name: "./data/Roboto.ttf"
+            font_size: "20dp"
+
+            size_hint: None, None
+            size: "200dp","20dp" #
+
+            pos_hint: {"center_x": 0.5}
+
+        Label:
+            id: Number_Display
+            text: root.available_numbers_label
+
+            font_name: "./data/Lcd.ttf"
+            font_size:  "30dp"
+
+            color: (1-root.light),(1-root.light),(1-root.light),1
+
+            size_hint: None, None
+            size: "220dp","20dp"
+
+            spacing: "30dp"
+
+            pos_hint: {"center_x":0.5}
+            
+
+        GridLayout:
+            rows: 2
+            cols: 2
+            BoxLayout:
+                padding: [10,10,40,10]
+                Button: 
+                    text: "SMALL"   
+                    on_press: root.Small() 
+            BoxLayout:
+                padding: [40,10,10,10]
+                Button:
+                    text: "BIG"
+                    on_press: root.Big()
+            BoxLayout:
+                padding: [10,10,40,10]
+                Button:
+                    text: "CLEAR"
+                    on_press: root.Clear()
+            BoxLayout:
+                padding: [40,10,10,10]
+                Button: 
+                    text: "NEXT"
+                    on_press: root.Next()
+                    disabled: root.enable   
+
+    
+<Options>:
+    canvas.before:
+        Rectangle: 
+            size: self.size
+            pos: self.pos
+            source: root.background
+        Color:
+            rgba: 1,1,1,root.light
+    BoxLayout
+        orientation: "vertical"
+        BoxLayout:
+            padding: [20,20,20,20]
+            orientation: 'horizontal'
+            size_hint: 0.9, None
+            height: "60dp"
+            pos_hint: {"center_x":0.5}
+            Label: 
+                text: "Light Mode"
+                color: (1-root.light),(1-root.light),(1-root.light),1
+
+                size_hint: None,1
+                length: "200dp"
+            Label: #padding only
+            Switch:
+                on_active: root.on_switch(self)
+
+                size_hint: None, 1
+                length: "200dp"
+        Label:
+
+        Button:
+            text: "Home"
+
+            size_hint: None, None
+            size: "60dp","30dp"
+            on_press: root.take_me_home_country_roads()
+
+
+<HomeScreen>:
+    canvas.before:
+        Rectangle: 
+            size: self.size
+            pos: self.pos
+            source: root.background
+        Color:
+            rgba: 1,1,1,root.light
+    GridLayout:
+        cols:1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1,None
+            height: "150dp"
+            spacing: "20dp"
+            Label:
+                text:"WELCOME TO GET CLOSEST"
+                color: (1-root.light),(1-root.light),(1-root.light),1
+                
+                font_name: "./data/Roboto.ttf" #just experimental
+                font_size: "20dp" 
+
+                size_hint: None, None
+                size: "400dp","30dp"
+
+                pos_hint: {"center_x":0.5}
+            Button:
+                text: "START"
+                
+                on_press: 
+                    root.start()
+
+                size_hint: None, None
+                size: "100dp","30dp"
+
+                pos_hint: {"center_x": .5}
+
+        Label: #just for dynamic padding to get to the bottom
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: None, None
+            size: "80dp","50dp"
+            Button:
+                text: "Profile"
+                on_press: root.Profile()
+                disabled: "True"
+            Button:
+                text: "Options"
+                on_press: root.Options()
+        
+<Manager>:
+    id: screen_manager
+
+    home: home  #home on the left is an Object and home on the right is id
+    menu: menu
+    options: options
+    game: game
+    result: result
+
+    HomeScreen:
+        id: home
+        name: "home"
+        manager: screen_manager
+
+    MenuScreen:
+        id: menu
+        name: "menu"
+        manager: 
+    
+    Options:
+        id: options
+        name: "options"
+        manager:
+
+    GameScreen:
+        id: game
+        name: "game"
+        manager:
+    
+    ResultScreen:
+        id: result
+        name: "result"
+        manager:
