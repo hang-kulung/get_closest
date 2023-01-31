@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.properties import NumericProperty,ObjectProperty,StringProperty,BooleanProperty,ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen,NoTransition
 import random
+import os
 
 class ResultScreen(Screen):
     #Instantiating necessary as the root. variable in kv was taken from the scope of the class
