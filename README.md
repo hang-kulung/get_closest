@@ -12,7 +12,7 @@
 </p>
 &nbsp;
       
-<p align="center">Get Closest is a Team Project on maknig a mobile game using Kivy Framework of the Python Programming Language. Game involves choosing 5 small or big number and with limited mathematical operator use, coming to a number that is very close to the goal</p>
+<p align="center">Get Closest is a Team Project on making a mobile game using Kivy Framework of the Python Programming Language. The Game involves choosing 5, either small or big number and with limited mathematical operator use, resulting to a number that is very close to the goal</p>
 
 &nbsp;
 ### 🤔 Project Come To Be
