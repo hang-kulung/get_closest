@@ -25,7 +25,7 @@
 
 ### ❤️ Contributors
 
-Thanks to the following tools developing this project is possible:
+Thanks to the following team this project is possible:
 
 - <a href="https://github.com/ITSURENXD">
 		<img alt="Issues" src="https://avatars.githubusercontent.com/u/42739895?v=4" width="25" height="25">Saugat Tamang</a> 
