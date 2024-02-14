@@ -27,9 +27,8 @@
 
 Thanks to the following team this project is possible:
 
-- <a href="https://github.com/ITSURENXD">
-		<img alt="Issues" src="https://avatars.githubusercontent.com/u/42739895?v=4" width="25" height="25">Saugat Tamang</a> 
-- <a href="https://github.com/hang-kulung">
-		<img alt="Issues" src="https://avatars.githubusercontent.com/u/118673128?v=4" width="25" height="25">Ninamhang Kulung</a>
+| <img alt="Issues" src="https://avatars.githubusercontent.com/u/42739895?v=4" width="25" height="25"> | <a href="https://github.com/ITSURENXD">Saugat Tamang</a> |
+|----------------|----------------|
+|<img alt="Issues" src="https://avatars.githubusercontent.com/u/118673128?v=4" width="25" height="25"> | <a href="https://github.com/hang-kulung"> Ninamhang Kulung</a> |
 
 
