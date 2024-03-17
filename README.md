@@ -25,10 +25,22 @@
 
 ### ❤️ Contributors
 
-Thanks to the following team this project is possible:
+Thanks for making this project possible:
 
 | <img alt="Issues" src="https://avatars.githubusercontent.com/u/42739895?v=4" width="25" height="25"> | <a href="https://github.com/ITSURENXD">Saugat Tamang</a> |
 |----------------|----------------|
 |<img alt="Issues" src="https://avatars.githubusercontent.com/u/118673128?v=4" width="25" height="25"> | <a href="https://github.com/hang-kulung"> Ninamhang Kulung</a> |
 
+&nbsp;
+
+### 📜 License
+
+Get Closest is released under the [MIT license](./LICENSE), which grants the following permissions:
+
+- Commercial use
+- Distribution
+- Modification
+- Private use
+
+&nbsp;
 
